@@ -1,0 +1,17 @@
+<div class="container ">
+    <div class="row" *ngIf="allSales.length==0">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                There is no sales for the given period.
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-md-12 ">
+            <div class="well">
+                <zingchart [chart]="chart"></zingchart>
+            </div>
+        </div>
+    </div>
+</div>

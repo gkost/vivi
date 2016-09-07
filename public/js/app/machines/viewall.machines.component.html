@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <vend-view-address-machines *ngFor="let machinesAddress of addressesMachines"
+                                        [name]="machinesAddress.name"
+                                        [addressId]="machinesAddress._id"
+                                        [machines]="machinesAddress.machines"
+                                        [streetAddress]="machinesAddress.streetAddress"
+            ></vend-view-address-machines>
+        </div>
+        <div class="col-md-6">
+            <vend-google-map-machines [title]="'Select address'" [markers]="markers"></vend-google-map-machines>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-success align-right" (click)="onAddAddress()">Add Address</button>
+            </div>
+        </div>
+    </div>
+
+</div>

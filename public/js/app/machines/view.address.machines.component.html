@@ -1,0 +1,104 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{{ name }}</h1>
+            <h4>{{ streetAddress }}</h4>
+            <div  *ngIf="!editMode">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Type<span class="arrow"></span></th>
+                        <th>Name<span class="arrow"></span></th>
+                        <th>Sold outs<span class="arrow"></span></th>
+                        <th>Status<span class="arrow"></span></th>
+                        <th>Manual supply<span class="arrow"></span></th>
+                        <th>Analytics</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let machine of machines">
+                        <td >{{_machineService.getMachineType(machine.type)}}</td>
+                        <td ><a [routerLink]="['/viewmachine', {id: machine._id}]">{{ machine.name }}</a></td>
+                        <td ><span>{{ machine.soldOuts }}</span></td>
+                        <td ><span>{{ machine.status }}</span></td>
+                        <td >
+                            <button (click)="onSupplyManual(machine._id)">
+                    <span class="glyphicon glyphicon-user" title data-original-title="Supply manually" >
+                    </span>
+                            </button>
+                        </td>
+                        <td width="5%">
+                            <button (click)="onAnalytics(machine,streetAddress)">
+                    <span class="glyphicon glyphicon-signal" title data-original-title="Supply manually" >
+                    </span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+
+            </div>
+
+            <div *ngIf="editMode">
+                <form role="form" [formGroup]="machineForm">
+                    <div class="form-group">
+                        <label for="machineName">Machine name</label>
+                        <input id="machineName"
+                               type="text"
+                               class="form-control"
+                               [formControl]="machineForm.find('machineName')"
+                               #machineName="ngForm"
+                        >
+                        <div *ngIf="machineName.touched && machineName.errors" class="alert alert-danger">
+                            <div
+                                    *ngIf="machineName.errors.required"
+                            >Please, provide address name.
+                            </div>
+                            <div
+                                    *ngIf="machineName.errors.minlength"
+                            >Minimum length for address name is 3 characters
+                            </div>
+                            <div
+                                    *ngIf="machineName.errors.maxlength"
+                            >Maximum length for address name is 30 characters
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="machineType">Machine type</label>
+                        <select id="machineType"
+                                class="form-control"
+                                [formControl]="machineForm.find('machineType')">
+                            <option *ngFor="let type of machineTypes" value="{{type.value}}">{{type.type}}</option>
+                            <!--<option value="0">Coffee</option>-->
+                            <!--<option value="1">Drinks</option>-->
+                            <!--<option value="2">Snacks</option>-->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serialNumber">Serial number</label>
+                        <input id="serialNumber"
+                               type="text"
+                               class="form-control"
+                               [formControl]="machineForm.find('serialNumber')"
+                               #serialNumber="ngForm"
+                        >
+                    </div>
+
+
+
+                </form>
+            </div>
+            <button class="btn btn-success align-right" (click)="onAddMachine()" *ngIf="!editMode">Add Machine</button>
+            <button class="btn btn-primary align-right" (click)="onCancelEdit()" *ngIf="editMode">Cancel</button>
+            <button class="btn btn-success align-right" (click)="onSaveMachine()" *ngIf="editMode">Save</button>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Driver's routes</h1>
+    <div class="table table-hover" *ngIf="!editMode">
+        <thead>
+        <tr>
+            <th>Route Name<span class="arrow"></span></th>
+            <th>Driver Name<span class="arrow"></span></th>
+            <th>Active state</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let route of routes">
+            <td width="20%"><a [routerLink]="['/createroute', {id: route._id}]">{{ route.name }}</a></td>
+            <td width="30%"><span>{{ route.driver.firstName }}&nbsp;{{ route.driver.lastName }}</span></td>
+            <td width="20%">{{ convertToState(route.activeState) }}</td>
+            <td width="30%">
+                <button type="button" (click)="onEdit(route)">
+                    <span class="glyphicon glyphicon-edit editToolTip" title data-original-title="Edit route"></span>
+                </button>
+                <button type="button" (click)="onActivate(route)">
+                    <span class="glyphicon glyphicon-off activateToolTip" title data-original-title="Activate/Deactivate route"></span>
+                </button>
+                <button type="button" (click)="onDelete(route)">
+                    <span class="glyphicon glyphicon-remove deleteToolTip" title data-original-title="Delete route"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </div>
+
+
+    <button type="button" class="btn btn-success btn-sm" (click)="onCreateRoute()">Create Route</button>
+</div>

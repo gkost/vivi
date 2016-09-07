@@ -1,0 +1,145 @@
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a [routerLink]="['/viewallplanograms']">Planograms</a></li>
+        <li class="active"><a><span *ngIf="createPlanogram">Create planogram</span><span *ngIf="!createPlanogram">Edit planogram</span></a></li>
+    </ol>
+    <h2 *ngIf="createPlanogram">Create Planogram</h2>
+    <h2 *ngIf="!createPlanogram">Edit Planogram</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <form role="form" [formGroup]="planogramForm">
+                <div class="form-group">
+                    <label for="planogramName">Planogram name</label>
+                    <input id="planogramName"
+                           type="text"
+                           class="form-control"
+                           [formControl]="planogramForm.find('name')"
+                           #planogrameName="ngForm"
+                    >
+                    <div *ngIf="planogrameName.touched && planogrameName.errors" class="alert alert-danger">
+                        <div
+                                *ngIf="planogrameName.errors.required"
+                        >Please, provide Planogram name.
+                        </div>
+                        <div
+                                *ngIf="planogrameName.errors.minlength"
+                        >Minimum length for Planogram name is 3 characters
+                        </div>
+                        <div
+                                *ngIf="planogrameName.errors.maxlength"
+                        >Maximum length for Planogram name is 30 characters
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!--<label>Planogram slots</label>-->
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="trayLabel">Trays</span>&nbsp;<span class="badge" >{{ traysSize }}</span>
+                    <button class="btn btn-info btn-sm" type="button" (click)="onAddTray()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" type="button" (click)="onRemoveTray()">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <span class="trayLabel">Slots</span>&nbsp;<span class="badge" >{{ slotsSize }}</span>
+                    <button class="btn btn-info btn-sm" type="button" (click)="onAddSlot()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" type="button" (click)="onRemoveSlot()">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row" style="border-bottom: 1px solid blue; margin-top: 5px; margin-bottom: 5px;"></div>
+            <div id="tray" *ngFor="let tray of trays" class="row">
+                <span id="slot"
+                        *ngFor="let slot of tray.slots"
+                        class="label label-primary btn btn-sm"
+                        [class.label-primary]="slot.product == -1"
+                        [class.label-success]="slot.product != -1"
+                        (click)="onSlotClicked(slot)">{{ slot.name }}</span>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <form role="form" [formGroup]="slotForm">
+                <div class="form-group">
+                    <label >Assigned product to <span *ngIf="selectedSlot">{{ selectedSlot.name }}</span></label>
+                </div>
+
+                <img src="http://placehold.it/120x120">
+
+                <div class="form-group">
+                <label for="productName">Product</label>
+                <input id="productName"
+                       type="text"
+                       class="form-control disabled"
+                       [formControl]="slotForm.find('name')"
+                >
+            </div>
+                <div class="form-group">
+                    <label for="slotCapacity">Capacity</label>
+                    <input id="slotCapacity"
+                           type="text"
+                           class="form-control disabled"
+                           [formControl]="slotForm.find('slotCapacity')"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Product price</label>
+                    <input id="productPrice"
+                           type="text"
+                           class="form-control disabled"
+                           [formControl]="slotForm.find('productPrice')"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="slotName">Slot custom name</label>
+                    <input id="slotName"
+                           type="text"
+                           class="form-control disabled"
+                           [formControl]="slotForm.find('slotName')"
+                    >
+                </div>
+            </form>
+            <button class="btn btn-success btn-sm" type="button" (click)="onAssign()">
+                Assign
+            </button>
+        </div>
+
+        <div class="col-md-4">
+            <label>Available products</label>
+            <div class="table table-hover">
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Picture<span class="arrow"></span></th>-->
+                    <!--<th>Name<span class="arrow"></span></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <tbody>
+                <tr *ngFor="let product of products">
+                    <td width="15%"><span>{{ product.imageUrl }}</span><span *ngIf="product.imageUrl.length == 0" class="glyphicon glyphicon-minus"></span></td>
+                    <td width="15%"><span class="btn btn-sm" (click)="onProductClicked(product)">{{ product.name }}</span><br />
+                        <span>{{ product.price }}</span></td>
+                </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <button class="btn btn-success btn-sm pull-right" type="button" (click)="onSavePlanogram()">
+                Save
+            </button>
+        </div>
+    </div>
+</div>

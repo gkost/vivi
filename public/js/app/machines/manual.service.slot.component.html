@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-3" id="mainPanel">
+                <div class="panel panel-success" >
+                    <div class="panel-body" id="thumbPanel">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/80x80">
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        {{ slot.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>
+                        {{ slot.product.name }}
+                    </label>
+                    <br />
+                    <label>
+                        Capacity: {{ slot.capacity}}
+                    </label>
+                    <br />
+                    <label>
+                        Price: ${{ slot.price }}
+                    </label>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <form [formGroup]="machineQuantityForm">
+                    <div class="form-group">
+                        <label for="productQuantity">Quantity</label>
+                        <input id="productQuantity"
+                               type="text"
+                               class="form-control"
+                               [formControl]="machineQuantityForm.find('productQuantity')"
+                               [value]="productQuantity"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success"
+                                (click)="onIncreaseQuantity(slot)"
+                                [disabled]="minimumCapacityReached==true">+</button>
+                        <button class="btn btn-danger"
+                                (click)="onDecreaseQuantity(slot)"
+                                [disabled]="maximumCapacityReached==true"
+                        >-</button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info"
+                                (click)="onProductSell(slot)">Sell</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

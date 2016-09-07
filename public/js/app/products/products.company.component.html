@@ -1,0 +1,57 @@
+<div class="container navbar-default" id="tableHeaderBar">
+    <form class="form form-inline">
+        <div class="form-group">
+            <label for="sortingFilter">sort by</label>
+            <select class="form-control" id="sortingFilter">
+                <option value="id"></option>
+                <option value="name">Name</option>
+                <option value="quantity">Quantity</option>
+            </select>
+        </div>
+        <div class="form-group pull-right">
+            <input type="text" class="form-control pull-right" style="width: 180px;"
+                   placeholder="Search..." id="search">
+        </div>
+    </form>
+</div>
+
+<!-- Products table -->
+<div class="container">
+    <div class="table table-hover">
+        <thead>
+        <tr>
+            <th>Picture<span class="arrow"></span></th>
+            <th>Id<span class="arrow"></span></th>
+            <th>Name<span class="arrow"></span></th>
+            <th>Description<span class="arrow"></span></th>
+            <th>Categories</th>
+            <th>Active state</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products">
+            <td width="12%"><span>{{ product.imageUrl }}</span><span *ngIf="product.imageUrl.length == 0" class="glyphicon glyphicon-minus"></span></td>
+            <td width="20%"><span>{{ product._id }}</span><span *ngIf="product._id.length == 0" class="glyphicon glyphicon-minus"></span> </td>
+            <td width="15%"><span>{{ product.name }}</span></td>
+            <td width="20%"><span>{{ product.description }}</span></td>
+            <td width="5%"><span>{{ product.categories }}</span></td>
+            <td width="14%"><span>{{ convertToState(product.activeState) }}</span></td>
+            <td width="14%">
+                <button type="button" (click)="onEdit(product)">
+                    <span class="glyphicon glyphicon-edit editToolTip" title data-original-title="Edit user"></span>
+                </button>
+                <button type="button" (click)="onActivate(product)">
+                    <span class="glyphicon glyphicon-off activateToolTip" title data-original-title="Activate/Deactivate user"></span>
+                </button>
+                <button type="button" (click)="onDelete(product)">
+                    <span class="glyphicon glyphicon-remove deleteToolTip" title data-original-title="Delete user"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </div>
+
+    <button type="button" class="btn btn-success btn-sm" id="addProductButton" (click)="onAddProduct()">Add product</button>
+</div>

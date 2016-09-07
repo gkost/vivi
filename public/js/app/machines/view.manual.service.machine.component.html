@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row" style="border-bottom: 1px solid blue; margin-bottom: 5px;"></div>
+    <div class="tray" *ngIf="currentPlanogram">
+        <h2>{{ currentPlanogram.name }}</h2>
+        <button class="btn btn-success" (click)="onUpdate()">Update</button>
+        <button class="btn btn-success" (click)="onUndo()">Undo</button>
+        <div class="row" *ngFor="let tray of currentPlanogram.trays">
+            <vend-manual-service-tray [tray]="tray" [machineId]="machineId"></vend-manual-service-tray>
+        </div>
+    </div>
+    <h2 *ngIf="!currentPlanogram">No planogram assigned.</h2>
+</div>

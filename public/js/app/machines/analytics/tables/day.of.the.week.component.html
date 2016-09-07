@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="10%">Time</th>
+        <th width="20%">Date</th>
+        <th width="50%">Day of the week</th>
+        <th width="10%">Cash</th>
+        <th width="10%">Items</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let weekSale of weekSales">
+        <td width="10%" class="filterable-cell">{{ weekSale.date }}</td>
+        <td width="20%" class="filterable-cell">{{ weekSale.time }}</td>
+        <td width="50%" class="filterable-cell">{{ weekSale.dayOfTheWeek }}</td>
+        <td width="10%" class="filterable-cell">$ {{ weekSale.cash }}</td>
+        <td width="10%" class="filterable-cell">{{ weekSale.items }}</td>
+    </tr>
+    </tbody>
+</table>

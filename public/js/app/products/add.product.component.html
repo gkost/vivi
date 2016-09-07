@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="panel panel-custom">
+        <div class="panel-heading" id="formHeader">Add a new product</div>
+        <div class="panel-body">
+
+            <form data-toggle="validator" role="form" [formGroup]="addProductForm">
+
+                <!-- Name of the productID -->
+                <div class="form-group">
+                    <label class="control-label" for="productName">Product name</label>
+                    <input type="text" maxlength="100" class="form-control" id="productName"
+                           [formControl]="addProductForm.find('name')"
+                           #productName="ngForm"
+                           [disabled]="productDeleted">
+
+                    <div *ngIf="productName.touched && productName.errors" class="alert alert-danger">
+                        <div
+                                *ngIf="productName.errors.required"
+                        >Product name is not valid.
+                        </div>
+                        <div
+                                *ngIf="productName.errors.minlength"
+                        >Minimum length for product name is 3 characters
+                        </div>
+                        <div
+                                *ngIf="productName.errors.maxlength"
+                        >Maximum length for product name is 30 characters
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Description of the productID -->
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea class="form-control" maxlength="5000" rows="8" id="productDescription"
+                              [formControl]="addProductForm.find('description')"></textarea>
+                </div>
+
+                <!-- Select 1 to 3 categories -->
+                <div class="form-group" id="selectCategoryMenu">
+                </div>
+
+                <!-- Automatic generated categoryID 1 -->
+                <div id="automaticGeneratedCategories">
+                    <!-- The following content should be generated automatically -->
+                </div>
+
+
+                <!-- Automatic generated array of images -->
+
+                <div class="row">
+                    <div id="sortable"></div>
+                </div>
+
+                <!-- Image URLs Input -->
+                <div class="form-group">
+                    <label class="control-label" for="imageURL">Image URL</label>
+                    <input type="text" class="form-control" id="imageURL"
+                           >
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-custom btn-sm" id="addImageURL"
+                            onclick="AddEditProduct.addImageURL()">Add Image
+                    </button>
+                </div>
+
+                <!-- Add image url up to 16 URLs -->
+
+                <button type="button" class="btn btn-custom btn-sm" id="saveButton"
+                        (click)="onCancel()">Cancel
+                </button>
+                <button type="button" class="btn btn-custom btn-sm" id="saveButton"
+                        (click)="onSubmit()">Save Product
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

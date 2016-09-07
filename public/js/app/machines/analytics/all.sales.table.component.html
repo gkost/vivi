@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="10%">Time</th>
+        <th width="20%">Date</th>
+        <th width="50%">Name</th>
+        <th width="20%">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sale of allSales">
+        <td width="10%" class="filterable-cell">{{getTime(sale.date)}}</td>
+        <td width="20%" class="filterable-cell">{{getDate(sale.date)}}</td>
+        <td width="50%" class="filterable-cell">{{sale.product.name}}</td>
+        <td width="20%" class="filterable-cell">{{sale.soldPrice}}</td>
+    </tr>
+    </tbody>
+</table>

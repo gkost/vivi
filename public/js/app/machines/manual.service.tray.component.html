@@ -1,0 +1,7 @@
+<div class="tray">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let slot of tray.slots">
+            <vend-manual-service-slot [slot]="slot" [machineId]="machineId"></vend-manual-service-slot>
+        </div>
+    </div>
+</div>

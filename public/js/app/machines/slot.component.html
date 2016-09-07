@@ -1,0 +1,16 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <span>{{ slot.name }}: {{ slot.product.name }}</span>
+    </div>
+    <div class="panel-body">
+        <div class="thumbnail">
+            <img src="http://placehold.it/80x80">
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div>
+            <span>{{productQuantity}}/{{slot.capacity}}</span>
+            <span class="pull-right">${{ slot.price }}</span>
+        </div>
+    </div>
+</div>

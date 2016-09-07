@@ -1,0 +1,98 @@
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a [routerLink]="['/viewallroutes']">Routes</a></li>
+        <li class="active"><a><span *ngIf="createRoute">Create Route</span><span *ngIf="!createRoute">Edit Route</span></a></li>
+    </ol>
+    <h2 *ngIf="createRoute">Create Route</h2>
+    <h2 *ngIf="!createRoute">Edit Route</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <form role="form" [formGroup]="routeForm" (ngSubmit)="onSaveRoute()">
+                <div class="form-group">
+                    <label for="routeName">Route name</label>
+                    <input id="routeName"
+                           type="text"
+                           class="form-control"
+                           [formControl]="routeForm.find('routeName')"
+                           #routeName="ngForm"
+                    >
+                    <div *ngIf="routeName.touched && routeName.errors" class="alert alert-danger">
+                        <div
+                                *ngIf="routeName.errors.required"
+                        >Please, provide Route name.
+                        </div>
+                        <div
+                                *ngIf="routeName.errors.minlength"
+                        >Minimum length for Route name is 3 characters
+                        </div>
+                        <div
+                                *ngIf="routeName.errors.maxlength"
+                        >Maximum length for Route name is 30 characters
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="driverName" *ngIf="possibleDrivers.length!=0">Driver name</label>
+                    <label for="driverName2" *ngIf="possibleDrivers.length==0">Driver name</label>
+                    <select *ngIf="possibleDrivers.length!=0"
+                            id="driverName"
+                            type="text"
+                            class="form-control"
+                            [formControl]="routeForm.find('driver')"
+                            #driverName="ngForm">
+                        <option [value]="undefined"
+                                [selected]="createRoute"></option>
+                        <option *ngFor="let driver of possibleDrivers"
+                                [value]="driver._id"
+                                [selected]="driver._id==currentDriverId">{{driver.firstName}}&nbsp;{{driver.lastName}}</option>
+                    </select>
+                    <input *ngIf="possibleDrivers.length==0"
+                           id="driverName2"
+                           type="text"
+                           class="form-control"
+                           [disabled]="true"
+                           value="No drivers to assign">
+                </div>
+
+                <!--- Route addresses --->
+                <div class="form-group" id="address">
+                    <label for="addressesContainer">Route addresses</label>
+                    <div class="form-control" id="addressesContainer">
+                        <div *ngFor="let marker of selectedMarkers">
+                            <div class="col-xs-12 col-sm-12 col-md-12 alert alert-custom alert-dismissible" role="alert">
+                                <button type="button" class="close"  aria-label="Close" (click)="removeMarker(marker)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <span>{{marker.name}}</span></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="buttons">
+                    <button class="btn btn-primary align-right" (click)="onCancelCreate()">Cancel</button>
+                    <button
+                            type="submit"
+                            class="btn btn-success align-right"
+                            >Save</button>
+                </div>
+            </form>
+
+
+
+
+
+        </div>
+
+        <div class="col-md-7">
+            <div id="mapContainer">
+                <vend-google-map-machines [title]="'Select address'" [mode]="'addroute'" [markers]="markers"></vend-google-map-machines>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,112 @@
+<div class="container">
+    <h2>Sales by machine <span id="machineName">- {{machineName}}</span><span id="streetAddress"> @ {{ streetAddress }}</span></h2>
+</div>
+<div class="container navbar-default" id="tableHeaderBar">
+    <form class="form form-inline" role="form" [formGroup]="dateForm">
+        <div class="form-group" *ngIf="option==1">
+        <label for="fromDate">From</label>
+        <input id="fromDate"
+               type="date"
+               class="form-control"
+               [formControl]="dateForm.find('fromDate')"
+               #fromDate="ngForm"
+        >
+        </div>
+        <div class="form-group" *ngIf="option==1">
+            <label for="toDate">To</label>
+            <input id="toDate"
+                   type="date"
+                   class="form-control"
+                   [formControl]="dateForm.find('toDate')"
+                   #toDate="ngForm"
+            >
+        </div>
+        <div class="form-group" *ngIf="option==2">
+            <label for="year">Year</label>
+            <select id="year"
+                   type="date"
+                   class="form-control"
+                   [formControl]="dateForm.find('year')"
+                   #toDate="ngForm"
+            >
+                <option *ngFor="let year of possibleYears"
+                        [value]="year"
+                        [selected]="year==currentYear">{{year}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" (click)="onDateRefresh()"><i class="glyphicon glyphicon-refresh"></i></button>
+        </div>
+        <div class="form-group pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="glyphicon glyphicon-option-vertical"></i> Options <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a (click)="onSales()">Sales</a></li>
+                    <li><a (click)="onTotalSales()">Total sales</a></li>
+                    <li><a >Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a >Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div id="breakLine"></div>
+    <div class="row">
+        <div class="col-md-6" *ngIf="option==1">
+                <div class="well">
+                    <form class="form form-inline" role="form">
+                        <label>Machine reports</label><br />
+                        <!--<div class="btn-group">-->
+                        <button type="button" class="btn btn-info" (click)="onSalesByHour()">
+                            <i class="glyphicon glyphicon-time"></i> Sales by hour
+                        </button>
+                        <button type="button" class="btn btn-info" (click)="onWeeklySales()">
+                            <i class="glyphicon glyphicon-calendar"></i> Weekly sales
+                        </button>
+                        <button type="button" class="btn btn-info" (click)="onDayOfTheWeekSales()">
+                            <i class="glyphicon glyphicon-calendar"></i> Day of the week
+                        </button>
+                        <!--</div>-->
+                    </form>
+                </div>
+        </div>
+        <div class="col-md-6" *ngIf="option==1">
+            <div class="well">
+                <div class="form form-inline" role="form">
+                    <label>Sales amounts</label><br /><br />
+                    <label for="cash">Cash: </label>
+                    <span id="cash" class="label label-success">${{cash}}</span>
+                    &nbsp;
+                    <label for="dailyAvg">Daily average: </label>
+                    <span id="dailyAvg" class="label label-success">${{dailyAvg}}</span>
+                    &nbsp;
+                    <!--<label for="serviceAvg">Service average: </label>-->
+                    <!--<span id="serviceAvg" class="label label-success">$1200</span>-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf="option==2">
+            <div class="well">
+                <div class="form form-inline" role="form">
+                    <label>Total sales amount for the year</label><br /><br />
+                    <label for="cash2">Cash: </label>
+                    <span id="cash2" class="label label-success">${{cash}}</span>
+                    &nbsp;
+                    <!--<label for="dailyAvg2">Daily average: </label>-->
+                    <!--<span id="dailyAvg2" class="label label-success">${{dailyAvg}}</span>-->
+                    &nbsp;
+                    <!--<label for="serviceAvg">Service average: </label>-->
+                    <!--<span id="serviceAvg" class="label label-success">$1200</span>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+
+<!--- Sales by machine component  --->
+<vend-sales-by-machine *ngIf="option==1" [machineId]="machineId"></vend-sales-by-machine>
+<vend-total-sales-by-machine *ngIf="option==2" [machineId]="machineId"></vend-total-sales-by-machine>

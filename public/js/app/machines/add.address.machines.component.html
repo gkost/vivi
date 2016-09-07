@@ -1,0 +1,35 @@
+<div class="row" >
+    <div class="col-md-4">
+        <form role="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="addressName">Address name</label>
+                <input id="addressName"
+                       type="text"
+                       class="form-control"
+                       [formControl]="myForm.find('addressName')"
+                       #addressName="ngForm"
+>
+
+                <div *ngIf="addressName.touched && addressName.errors" class="alert alert-danger">
+                    <div
+                            *ngIf="addressName.errors.required"
+                    >Please, provide address name.
+                    </div>
+                    <div
+                            *ngIf="addressName.errors.minlength"
+                    >Minimum length for address name is 3 characters
+                    </div>
+                    <div
+                            *ngIf="addressName.errors.maxlength"
+                    >Maximum length for address name is 30 characters
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary has-spinner" id="saveButton">Save</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <vend-google-map-machines [title]="'Select address'" [mode]="'addaddress'" [markers]="markers"></vend-google-map-machines>
+    </div>
+</div>

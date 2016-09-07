@@ -1,0 +1,29 @@
+<div class="container ">
+    <div class="row" *ngIf="allSales.length==0">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                There is no sales for the given period.
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="allSales.length>0">
+        <div class="col-md-6 ">
+            <div class="well">
+                <table-all-sales
+                        *ngIf="tableType==1"
+                        [allSales]="allSales">
+                </table-all-sales>
+                <table-day-of-the-week
+                    *ngIf="tableType==3"
+                    [weekSales]="weekSales">
+                </table-day-of-the-week>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="well">
+                <zingchart [chart]="chart"></zingchart>
+            </div>
+        </div>
+    </div>
+</div>

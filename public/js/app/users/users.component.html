@@ -1,0 +1,58 @@
+<div class="container navbar-default" id="tableHeaderBar">
+    <form class="form form-inline">
+        <div class="form-group">
+            <label for="sortingFilter">sort by</label>
+            <select class="form-control" id="sortingFilter">
+                <option value="id"></option>
+                <option value="username">Username</option>
+                <option value="firstName">First name</option>
+                <option value="lastName">Last name</option>
+                <option value="activeState">Active state</option>
+                <option value="email">Email</option>
+            </select>
+        </div>
+        <div class="form-group pull-right">
+            <input type="text" class="form-control pull-right" style="width: 180px;"
+                   placeholder="Search..." id="search">
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="table table-hover">
+        <thead>
+        <tr>
+            <th>Username<span class="arrow"></span></th>
+            <th>First name<span class="arrow"></span></th>
+            <th>Last name<span class="arrow"></span></th>
+            <th>Role<span class="arrow"></span></th>
+            <th>Active state<span class="arrow"></span></th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <td width="20%">{{ user.username }}</td>
+            <td width="20%"><span>{{ user.firstName }}</span><span *ngIf="user.firstName.length == 0" class="glyphicon glyphicon-minus"></span></td>
+            <td width="20%"><span>{{ user.lastName }}</span><span *ngIf="user.lastName.length == 0" class="glyphicon glyphicon-minus"></span> </td>
+            <td width="15%"><span>{{ convertToRole(user.userRole) }}</span></td>
+            <td width="14%"><span>{{ convertToState(user.activeState) }}</span></td>
+            <td width="14%">
+                <button type="button" (click)="onEdit(user)">
+                    <span class="glyphicon glyphicon-edit editToolTip" title data-original-title="Edit user"></span>
+                </button>
+                <button type="button" (click)="onActivate(user)">
+                    <span class="glyphicon glyphicon-off activateToolTip" title data-original-title="Activate/Deactivate user"></span>
+                </button>
+                <button type="button" (click)="onDelete(user)">
+                    <span class="glyphicon glyphicon-remove deleteToolTip" title data-original-title="Delete user"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </div>
+    <br />
+    <button class="btn btn-success" (click)="onAddUser()">Add User</button>
+</div>
+<router-outlet></router-outlet>

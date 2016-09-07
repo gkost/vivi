@@ -1,0 +1,10 @@
+.tray {
+    height: 75px;
+}
+.slot {
+    width: 75px;
+}
+.colonHeader {
+    width: 15px;
+    background-color: cornflowerblue;
+}

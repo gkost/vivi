@@ -1,0 +1,11 @@
+<div class="tray">
+    <!--<div class="pull-left colonHeader">-->
+        <!--<p>A</p>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-md-2" *ngFor="let slot of tray.slots">
+            <vend-slot [slot]="slot" [machineId]="machineId"></vend-slot>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row">
+        <h2>Edit Machine</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form role="form" [formGroup]="machineForm">
+                <div class="form-group">
+                    <label for="machineName">Machine name</label>
+                    <input id="machineName"
+                           type="text"
+                           class="form-control"
+                           [formControl]="machineForm.find('name')"
+                           #machineName="ngForm"
+                           [disabled]="!editMode"
+                    >
+                    <div *ngIf="machineName.touched && machineName.errors" class="alert alert-danger">
+                        <div
+                                *ngIf="machineName.errors.required"
+                        >Please, provide Machine name.
+                        </div>
+                        <div
+                                *ngIf="machineName.errors.minlength"
+                        >Minimum length for Machine name is 3 characters
+                        </div>
+                        <div
+                                *ngIf="machineName.errors.maxlength"
+                        >Maximum length for Machine name is 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="serialNumber">Serial number</label>
+                    <input id="serialNumber"
+                           type="text"
+                           class="form-control"
+                           [formControl]="machineForm.find('serialNumber')"
+                           #serialNumber="ngForm"
+                           [disabled]="!editMode"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="machineModel">Machine model</label>
+                    <input id="machineModel"
+                           type="text"
+                           class="form-control"
+                           [formControl]="machineForm.find('model')"
+                           #model="ngForm"
+                           [disabled]="!editMode"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="machineType">Type</label>
+                    <select id="machineType"
+                           class="form-control"
+                           [formControl]="machineForm.find('type')"
+                           #machineType="ngForm"
+                           [disabled]="!editMode"
+                    >
+                        <option *ngFor="let type of machineTypes"
+                                value="{{type.value}}"
+                                [selected]="type.value==machine.type">{{type.type}}</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="machineStatus">Status</label>
+                    <span id="machineStatus" class="label label-success">OK</span>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form role="form" [formGroup]="machineOptionsForm">
+                <div class="form-group">
+                    <h4>Machine options</h4>
+                    <div class="checkbox">
+                        <label>
+                            <input id="offlineMachine"
+                                   type="checkbox"
+                                   [formControl]="machineOptionsForm.find('offlineMachine')"
+                                   #offlineMachine="ngForm"
+                                   [disabled]="!editMode"
+                            >
+                            Offline machine
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input id="disconnectedMachine"
+                                   type="checkbox"
+                                   [formControl]="machineOptionsForm.find('disconnectedMachine')"
+                                   #offlineMachine="ngForm"
+                                   [disabled]="!editMode"
+                            >
+                            Disconnected machine
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" style="border-bottom: 1px solid blue;"></div>
+                <div class="form-group">
+                    <label for="selectPlanogram">Assign new planogram</label>
+                    <select id="selectPlanogram"
+                           class="form-control"
+                           [formControl]="machineOptionsForm.find('newPlanogram')"
+                           #newPlanogram="ngForm"
+                            (change)="onChange($event.target.value)"
+                            [disabled]="!editMode">
+                        <!--<span *ngIf="planograms">-->
+                            <option *ngFor="let planogram of planograms"
+                                    value="{{planogram._id}}"
+                                    [selected]="planogram._id==currentPlanogramId">{{ planogram.name }}</option>
+                        <!--</span>-->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-info" (click)="editMode=!editMode"><span *ngIf="!editMode"><span class="glyphicon glyphicon-edit"></span> Edit</span><span *ngIf="editMode">Lock</span></button>
+                    <button type="button" class="btn btn-info" (click)="onSave()" [disabled]="!editMode">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" style="border-bottom: 1px solid blue; margin-bottom: 5px;"></div>
+        <!--<div class="pull-left colonHeader">-->
+        <!--<p>A</p>-->
+        <!--</div>-->
+
+    <div class="tray" *ngIf="currentPlanogram">
+        <h2>{{ currentPlanogram.name }}</h2>
+            <div class="row" *ngFor="let tray of currentPlanogram.trays">
+                <vend-tray [tray]="tray" [machineId]="machineId"></vend-tray>
+            </div>
+
+
+    </div>
+    <h2 *ngIf="!currentPlanogram">No planogram assigned.</h2>
+</div>

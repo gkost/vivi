@@ -1,0 +1,16 @@
+/*.panel {*/
+    /*width: 80px;*/
+/*}*/
+.thumbnail {
+    padding: 5px;
+    margin: 5px;
+}
+
+.panel-body {
+    padding: 0;
+    margin: 0;
+}
+
+.panel-footer {
+    background-color: #5dceee;
+}

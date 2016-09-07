@@ -1,0 +1,21 @@
+button .btn-group.btn.btn-info {
+    margin-right: 10px !important;
+}
+#tableHeaderBar {
+    padding-top: 10px;
+    margin-top: 10px;
+    border: 1px solid #7f7f7f;
+    font: inherit;
+}
+#machineName{
+    font-size: 0.6em;
+    color: #00B7FF;
+}
+#streetAddress {
+    font-size: 0.6em;
+}
+#breakLine{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #7f7f7f;
+}

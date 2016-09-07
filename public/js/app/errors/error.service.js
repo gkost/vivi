@@ -1,0 +1,16 @@
+"use strict";
+var core_1 = require("@angular/core");
+var error_1 = require("./error");
+var ErrorService = (function () {
+    function ErrorService() {
+        this.errorOccurred = new core_1.EventEmitter();
+    }
+    ErrorService.prototype.handleError = function (error) {
+        var errorData = new error_1.Error(error.title, error.error.message);
+        this.errorOccurred.emit(errorData);
+    };
+    return ErrorService;
+}());
+exports.ErrorService = ErrorService;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImVycm9ycy9lcnJvci5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxxQkFBNkIsZUFBZSxDQUFDLENBQUE7QUFFN0Msc0JBQXNCLFNBQVMsQ0FBQyxDQUFBO0FBR2hDO0lBQUE7UUFDSSxrQkFBYSxHQUFHLElBQUksbUJBQVksRUFBUyxDQUFDO0lBTTlDLENBQUM7SUFKRyxrQ0FBVyxHQUFYLFVBQVksS0FBVTtRQUNsQixJQUFNLFNBQVMsR0FBRyxJQUFJLGFBQUssQ0FBQyxLQUFLLENBQUMsS0FBSyxFQUFFLEtBQUssQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDOUQsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDdkMsQ0FBQztJQUNMLG1CQUFDO0FBQUQsQ0FQQSxBQU9DLElBQUE7QUFQWSxvQkFBWSxlQU94QixDQUFBIiwiZmlsZSI6ImVycm9ycy9lcnJvci5zZXJ2aWNlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRXZlbnRFbWl0dGVyIH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcclxuXHJcbmltcG9ydCB7IEVycm9yIH0gZnJvbSBcIi4vZXJyb3JcIjtcclxuXHJcblxyXG5leHBvcnQgY2xhc3MgRXJyb3JTZXJ2aWNlIHtcclxuICAgIGVycm9yT2NjdXJyZWQgPSBuZXcgRXZlbnRFbWl0dGVyPEVycm9yPigpO1xyXG5cclxuICAgIGhhbmRsZUVycm9yKGVycm9yOiBhbnkpIHtcclxuICAgICAgICBjb25zdCBlcnJvckRhdGEgPSBuZXcgRXJyb3IoZXJyb3IudGl0bGUsIGVycm9yLmVycm9yLm1lc3NhZ2UpO1xyXG4gICAgICAgIHRoaXMuZXJyb3JPY2N1cnJlZC5lbWl0KGVycm9yRGF0YSk7XHJcbiAgICB9XHJcbn0iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=

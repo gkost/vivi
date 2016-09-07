@@ -1,0 +1,43 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var confirmation_service_1 = require("./confirmation.service");
+var response_1 = require("./../response");
+var ConfirmationComponent = (function () {
+    function ConfirmationComponent(_confirmationService) {
+        this._confirmationService = _confirmationService;
+        this.confirmDisplay = 'none';
+    }
+    ConfirmationComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._confirmationService.infoOccurred.subscribe(function (infoData) {
+            _this.infoData = infoData;
+            _this.confirmDisplay = 'block';
+        });
+    };
+    ConfirmationComponent.prototype.onConfirmHandled = function (value) {
+        this.confirmDisplay = 'none';
+        var response = new response_1.Response('confirmation', value);
+        this._confirmationService.responseOccured.emit(response);
+    };
+    ConfirmationComponent = __decorate([
+        core_1.Component({
+            selector: 'vend-confirmation-dialog',
+            template: "\n        <div class=\"backdrop\" [ngStyle]=\"{'display': confirmDisplay}\"></div>\n\n        <!-- Confirmation modal dialog -->\n        <div id=\"confirmationDialog\" class=\"modal bs-example-modal-sm\" role=\"dialog\" [ngStyle]=\"{'display': confirmDisplay}\">\n            <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" (click)=\"onConfirmHandled(false)\">&times;</button>\n                        <h4 class=\"modal-title\">{{ infoData?.title }}<span id=\"titleOfOperation\"></span></h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        {{ infoData?.message }}\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-custom btn-sm\" id=\"btnConfirmYes\" (click)=\"onConfirmHandled(true)\"><span\n                                class=\"glyphicon glyphicon-ok\" ></span> Yes\n                        </button>\n                        <button type=\"button\" class=\"btn btn-default btn-sm\" id=\"btnConfirmNo\" (click)=\"onConfirmHandled(false)\"><span\n                                class=\"glyphicon glyphicon-remove\" ></span> No\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
+            styles: ["\n        .backdrop {\n            background-color: rgba(0,0,0,0.6);\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100vh;\n        }\n    "]
+        }), 
+        __metadata('design:paramtypes', [confirmation_service_1.ConfirmationService])
+    ], ConfirmationComponent);
+    return ConfirmationComponent;
+}());
+exports.ConfirmationComponent = ConfirmationComponent;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRpYWxvZ3MvY29uZmlybWF0aW9uL2NvbmZpcm1hdGlvbi5kaWFsb2cuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxxQkFBa0MsZUFBZSxDQUFDLENBQUE7QUFFbEQscUNBQWtDLHdCQUF3QixDQUFDLENBQUE7QUFDM0QseUJBQXVCLGVBQWUsQ0FBQyxDQUFBO0FBeUN2QztJQUlJLCtCQUFvQixvQkFBeUM7UUFBekMseUJBQW9CLEdBQXBCLG9CQUFvQixDQUFxQjtRQUg3RCxtQkFBYyxHQUFHLE1BQU0sQ0FBQztJQUd3QyxDQUFDO0lBRWpFLHdDQUFRLEdBQVI7UUFBQSxpQkFPQztRQU5HLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUM1QyxVQUFBLFFBQVE7WUFDSixLQUFJLENBQUMsUUFBUSxHQUFHLFFBQVEsQ0FBQztZQUN6QixLQUFJLENBQUMsY0FBYyxHQUFHLE9BQU8sQ0FBQztRQUNsQyxDQUFDLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFRCxnREFBZ0IsR0FBaEIsVUFBaUIsS0FBYztRQUMzQixJQUFJLENBQUMsY0FBYyxHQUFHLE1BQU0sQ0FBQztRQUM3QixJQUFNLFFBQVEsR0FBRyxJQUFJLG1CQUFRLENBQUMsY0FBYyxFQUFFLEtBQUssQ0FBQyxDQUFDO1FBQ3JELElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzdELENBQUM7SUEzREw7UUFBQyxnQkFBUyxDQUFDO1lBQ1AsUUFBUSxFQUFFLDBCQUEwQjtZQUNwQyxRQUFRLEVBQUUscTdDQXlCVDtZQUNELE1BQU0sRUFBRSxDQUFDLHVOQVNSLENBQUM7U0FDTCxDQUFDOzs2QkFBQTtJQXdCRiw0QkFBQztBQUFELENBdEJBLEFBc0JDLElBQUE7QUF0QlksNkJBQXFCLHdCQXNCakMsQ0FBQSIsImZpbGUiOiJkaWFsb2dzL2NvbmZpcm1hdGlvbi9jb25maXJtYXRpb24uZGlhbG9nLmNvbXBvbmVudC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcbmltcG9ydCB7IEluZm8gfSBmcm9tICcuLi9pbmZvJztcclxuaW1wb3J0IHtDb25maXJtYXRpb25TZXJ2aWNlfSBmcm9tIFwiLi9jb25maXJtYXRpb24uc2VydmljZVwiO1xyXG5pbXBvcnQge1Jlc3BvbnNlfSBmcm9tIFwiLi8uLi9yZXNwb25zZVwiO1xyXG5AQ29tcG9uZW50KHtcclxuICAgIHNlbGVjdG9yOiAndmVuZC1jb25maXJtYXRpb24tZGlhbG9nJyxcclxuICAgIHRlbXBsYXRlOiBgXHJcbiAgICAgICAgPGRpdiBjbGFzcz1cImJhY2tkcm9wXCIgW25nU3R5bGVdPVwieydkaXNwbGF5JzogY29uZmlybURpc3BsYXl9XCI+PC9kaXY+XHJcblxyXG4gICAgICAgIDwhLS0gQ29uZmlybWF0aW9uIG1vZGFsIGRpYWxvZyAtLT5cclxuICAgICAgICA8ZGl2IGlkPVwiY29uZmlybWF0aW9uRGlhbG9nXCIgY2xhc3M9XCJtb2RhbCBicy1leGFtcGxlLW1vZGFsLXNtXCIgcm9sZT1cImRpYWxvZ1wiIFtuZ1N0eWxlXT1cInsnZGlzcGxheSc6IGNvbmZpcm1EaXNwbGF5fVwiPlxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzPVwibW9kYWwtZGlhbG9nIG1vZGFsLXNtXCI+XHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwibW9kYWwtY29udGVudFwiPlxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJtb2RhbC1oZWFkZXJcIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgY2xhc3M9XCJjbG9zZVwiIChjbGljayk9XCJvbkNvbmZpcm1IYW5kbGVkKGZhbHNlKVwiPiZ0aW1lczs8L2J1dHRvbj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzPVwibW9kYWwtdGl0bGVcIj57eyBpbmZvRGF0YT8udGl0bGUgfX08c3BhbiBpZD1cInRpdGxlT2ZPcGVyYXRpb25cIj48L3NwYW4+PC9oND5cclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwibW9kYWwtYm9keVwiPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICB7eyBpbmZvRGF0YT8ubWVzc2FnZSB9fVxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJtb2RhbC1mb290ZXJcIj5cclxuICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgY2xhc3M9XCJidG4gYnRuLWN1c3RvbSBidG4tc21cIiBpZD1cImJ0bkNvbmZpcm1ZZXNcIiAoY2xpY2spPVwib25Db25maXJtSGFuZGxlZCh0cnVlKVwiPjxzcGFuXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3M9XCJnbHlwaGljb24gZ2x5cGhpY29uLW9rXCIgPjwvc3Bhbj4gWWVzXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBjbGFzcz1cImJ0biBidG4tZGVmYXVsdCBidG4tc21cIiBpZD1cImJ0bkNvbmZpcm1Ob1wiIChjbGljayk9XCJvbkNvbmZpcm1IYW5kbGVkKGZhbHNlKVwiPjxzcGFuXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3M9XCJnbHlwaGljb24gZ2x5cGhpY29uLXJlbW92ZVwiID48L3NwYW4+IE5vXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgYCxcclxuICAgIHN0eWxlczogW2BcclxuICAgICAgICAuYmFja2Ryb3Age1xyXG4gICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsMCwwLDAuNik7XHJcbiAgICAgICAgICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgICAgICAgICAgdG9wOiAwO1xyXG4gICAgICAgICAgICBsZWZ0OiAwO1xyXG4gICAgICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICAgICAgaGVpZ2h0OiAxMDB2aDtcclxuICAgICAgICB9XHJcbiAgICBgXVxyXG59KVxyXG5cclxuZXhwb3J0IGNsYXNzIENvbmZpcm1hdGlvbkNvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XHJcbiAgICBjb25maXJtRGlzcGxheSA9ICdub25lJztcclxuICAgIGluZm9EYXRhOiBJbmZvO1xyXG5cclxuICAgIGNvbnN0cnVjdG9yKHByaXZhdGUgX2NvbmZpcm1hdGlvblNlcnZpY2U6IENvbmZpcm1hdGlvblNlcnZpY2UpIHt9XHJcblxyXG4gICAgbmdPbkluaXQoKSB7XHJcbiAgICAgICAgdGhpcy5fY29uZmlybWF0aW9uU2VydmljZS5pbmZvT2NjdXJyZWQuc3Vic2NyaWJlKFxyXG4gICAgICAgICAgICBpbmZvRGF0YSA9PiB7XHJcbiAgICAgICAgICAgICAgICB0aGlzLmluZm9EYXRhID0gaW5mb0RhdGE7XHJcbiAgICAgICAgICAgICAgICB0aGlzLmNvbmZpcm1EaXNwbGF5ID0gJ2Jsb2NrJztcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICk7XHJcbiAgICB9XHJcblxyXG4gICAgb25Db25maXJtSGFuZGxlZCh2YWx1ZTogYm9vbGVhbikge1xyXG4gICAgICAgIHRoaXMuY29uZmlybURpc3BsYXkgPSAnbm9uZSc7XHJcbiAgICAgICAgY29uc3QgcmVzcG9uc2UgPSBuZXcgUmVzcG9uc2UoJ2NvbmZpcm1hdGlvbicsIHZhbHVlKTtcclxuICAgICAgICB0aGlzLl9jb25maXJtYXRpb25TZXJ2aWNlLnJlc3BvbnNlT2NjdXJlZC5lbWl0KHJlc3BvbnNlKTtcclxuICAgIH1cclxuXHJcblxyXG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9

@@ -1,0 +1,167 @@
+<div class="backdrop" [ngStyle]="{'display': 'block'}"></div>
+<div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="formHeader"><span id="addEditTitle"></span></div>
+            <div class="panel-body">
+                <form role="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username"
+                               type="text"
+                               class="form-control"
+                               [formControl]="myForm.find('username')"
+                                #username="ngForm"
+                                [disabled]="userDeleted">
+
+                        <div *ngIf="username.touched && username.errors" class="alert alert-danger">
+                            <div
+                                    *ngIf="username.errors.required"
+                                    >Username is not valid.
+                            </div>
+                            <div
+                                *ngIf="username.errors.cannotContainSpace"
+                                >Username cannot contain space.
+                            </div>
+                            <div
+                                *ngIf="username.errors.shouldBeUnique"
+                                >This username is already taken.
+                            </div>
+
+                            <div
+                                    *ngIf="username.errors.minlength"
+                                    >Minimum length for username is 3 characters
+                            </div>
+                            <div
+                                    *ngIf="username.errors.maxlength"
+                                    >Maximum length for username is 30 characters
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password"
+                               type="text"
+                               class="form-control"
+                               pattern=".{4,24}"
+                               [formControl]="myForm.find('password')"
+                               #password="ngForm"
+                               [disabled]="userDeleted"
+                        >
+                        <div *ngIf="password.touched && password.errors">
+                            <div
+                                    *ngIf="password.errors.required"
+                                    class="alert alert-danger">Pleas, provide password.
+                            </div>
+                            <div
+                                *ngIf="password.errors.minlength"
+                                class="alert alert-danger">Minimum length for password is 4 characters
+                            </div>
+                            <div
+                                    *ngIf="password.errors.maxlength"
+                                    class="alert alert-danger">Maximum length for password is 24 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole">Role</label>
+                        <select id="userRole"
+                                class="form-control"
+                                [formControl]="myForm.find('userRole')"
+                                #userRole="ngForm"
+                                [disabled]="userDeleted"
+                                [disabled]="sameUser">
+                            <option value="0">Administrator</option>
+                            <option value="1">Planing technician</option>
+                            <option value="2">Driver</option>
+                            <option value="3">Inventor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input id="firstName"
+                               class="form-control"
+                               type="text"
+                                [formControl]="myForm.find('firstName')"
+                                #firstName="ngForm"
+                               [disabled]="userDeleted">
+                        <div *ngIf="firstName.touched && firstName.errors">
+                            <div
+                                    *ngIf="firstName.errors.maxlength"
+                                    class="alert alert-danger">Maximum length for first name is 30 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input id="lastName"
+                               class="form-control"
+                               type="text"
+                                [formControl]="myForm.find('lastName')"
+                                #lastName="ngForm"
+                               [disabled]="userDeleted">
+                        <div *ngIf="lastName.touched && lastName.errors">
+                            <div
+                                    *ngIf="lastName.errors.maxlength"
+                                    class="alert alert-danger">Maximum length for last name is 30 characters.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email"
+                               class="form-control"
+                               type="email"
+                                [formControl]="myForm.find('email')"
+                                #email="ngForm"
+                               [disabled]="userDeleted">
+                        <div *ngIf="email.touched && email.errors">
+                            <div
+                                    *ngIf="email.errors.maxlength"
+                                    class="alert alert-danger">Maximum length for e-mail is 250 characters.
+                            </div>
+                            <div
+                                    *ngIf="email.errors.invalidMail"
+                                    class="alert alert-danger">E-mail is invalid.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activeState">Active state</label>
+                        <select id="activeState"
+                                class="form-control"
+                                [formControl]="myForm.find('activeState')"
+                                [disabled]="userDeleted"
+                                [disabled]="sameUser">
+                            <option value="0">Active</option>
+                            <option value="1">Deactivated</option>
+                            <option value="2">Removed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes"
+                                  class="form-control"
+                                  rows="7"
+                                    [formControl]="myForm.find('notes')"
+                                    #notes="ngForm"
+                                  [disabled]="userDeleted">
+                        </textarea>
+                        <div *ngIf="notes.touched && notes.errors">
+                            <div
+                                    *ngIf="notes.errors.maxlength"
+                                    class="alert alert-danger">Maximum length for notes is 500 characters.
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" (click)="onCancel()" id="cancelButton">Cancel</button>
+                    <button type="submit" class="btn btn-primary has-spinner" id="saveButton" [disabled]="userDeleted">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

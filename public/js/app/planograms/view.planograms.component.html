@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>{{ name }}</h1>
+    <h4>{{ streetAddress }}</h4>
+    <div class="table table-hover" *ngIf="!editMode">
+        <thead>
+        <tr>
+            <th>Name<span class="arrow"></span></th>
+            <th>Trays<span class="arrow"></span></th>
+            <th>Slots<span class="arrow"></span></th>
+            <th>Active state</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let planogram of planograms">
+            <td width="20%"><a [routerLink]="['/viewplanogram', {id: planogram._id,view:true}]">{{ planogram.name }}</a></td>
+            <td width="5%"><span>{{ planogram.trays.length }}</span></td>
+            <td width="6%"><span>{{ planogram.trays[0].length }}</span></td>
+            <td width="10%">{{ convertToState(planogram.activeState) }}</td>
+            <td width="14%">
+                <button type="button" (click)="onEdit(planogram)">
+                <span class="glyphicon glyphicon-edit editToolTip" title data-original-title="Edit planogram"></span>
+                </button>
+                <button type="button" (click)="onActivate(planogram)">
+                <span class="glyphicon glyphicon-off activateToolTip" title data-original-title="Activate/Deactivate planogram"></span>
+                </button>
+                <button type="button" (click)="onDelete(planogram)">
+                <span class="glyphicon glyphicon-remove deleteToolTip" title data-original-title="Delete planogram"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </div>
+    <button type="button" class="btn btn-success btn-sm" (click)="onCreatePlanogram()">Create Planogram</button>
+</div>
